@@ -74,7 +74,7 @@ We thank the following people who contributed to this project:
       <a href="#">
         <img src="https://avatars.githubusercontent.com/u/38147044" width="100px;" alt="Foto do Elias Santana no GitHub"/><br>
         <sub>
-          <b>Raul B. Wohnrath</b>
+          <b>Elias Santana</b>
         </sub>
       </a>
     </td>
