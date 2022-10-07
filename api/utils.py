@@ -6,6 +6,5 @@ def time():
     fuso = timezone('America/Sao_Paulo')
 
     hora = hora_atual.astimezone(fuso)
-    hora = hora.strftime("%A-%m-%Y %H:%M:%S")
 
-    return hora
+    return hora.strftime("%A-%m-%Y %H:%M:%S")
