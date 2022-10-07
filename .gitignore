@@ -1,3 +1,4 @@
 env
 dnn_model
 __pycache__
+/venv
