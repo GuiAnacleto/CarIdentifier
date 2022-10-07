@@ -1,5 +1,7 @@
 numpy==1.23.3
+opencv-contrib-python==4.6.0.66
 opencv-python==4.6.0.66
 werkzeug<=2.1.2 
 flask==2.1.2
 pytz==2022.2.1
+flask-pydantic-spec==0.3.1

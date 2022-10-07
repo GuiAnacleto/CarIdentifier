@@ -1,19 +1,40 @@
-from flask import Flask
-from flask_pydantic_spec import FlaskPydanticSpec
-from datetime import datetime
-from pytz import timezone
+from flask import Flask, jsonify
+from flask_pydantic_spec import FlaskPydanticSpec, Response
+from pydantic import BaseModel
+from utils import time
 
 server = Flask(__name__)
-spec = FlaskPydanticSpec('flask', title='CarIdentifier')
-
+spec = FlaskPydanticSpec('flask', title='Vehicle Identifier')
 spec.register(server)
 
-@server.get('/camera')
-def get_camera():
-    hora_atual = datetime.now()
-    fuso_horario = timezone('America/Sao_Paulo')
+class Camera(BaseModel):
+    id_semafaro: int
+    carro_esperando: bool
+    data: str
 
-    hora = hora_atual.astimezone(fuso_horario)
-    return hora.strftime("%A-%m-%Y %H:%M:%S")
+
+@server.get('/camera/<int:id>')
+@spec.validate(resp=Response(HTTP_200=Camera))
+def get_camera(id):
+    """Retorna se a camera identificou algum veículo esperando  """
+    #aqui será chamado o modelo de classificação que irá dizer se tem
+    #carro parado ou não
+    
+    #em seguida o resultado será armazenado em um json e retornado como response
+    try:
+        dic = {
+            'id_semafaro': id,
+            'carro_esperando': True,
+            'data': time()
+        }
+    except Exception as e:
+        print("Error: ", e)
+        dic = {
+            'id_semafaro': id,
+            'carro_esperando': True,
+            'data': "Default"
+        }
+
+    return jsonify(dic)
 
 server.run()
