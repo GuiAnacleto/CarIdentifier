@@ -2,6 +2,8 @@ from flask import Flask, jsonify
 from flask_pydantic_spec import FlaskPydanticSpec, Response
 from pydantic import BaseModel
 from utils import time
+from bumblebee import identifier
+
 
 server = Flask(__name__)
 spec = FlaskPydanticSpec('flask', title='Vehicle Identifier')
@@ -16,7 +18,7 @@ class Erro(BaseModel):
     Error : str
 
 @server.get('/camera/<int:id>')
-@spec.validate(resp=Response(HTTP_200=StatusTransito))
+#@spec.validate(resp=Response(HTTP_200=StatusTransito))
 def get_camera(id):
     """Retorna se a camera identificou algum veículo esperando  """
     
@@ -27,7 +29,7 @@ def get_camera(id):
     try:
         dic = {
             'id_semafaro': id,
-            'carro_esperando': True,
+            'carro_esperando': identifier(id),
             'data': time()
         }
     except Exception as e:

@@ -23,10 +23,13 @@ def captura_frame(id):
 
     if id == 0:
         camera = cv.VideoCapture("")
+        cv.waitKey(1)
     elif id == 1:
         camera = cv.VideoCapture("")
+        cv.waitKey(1)
     else:
         frame = cv.imread('imagem-com-carro.jpg')
+        cv.waitKey(1)
         return frame
 
     frame = camera.read()
@@ -34,3 +37,20 @@ def captura_frame(id):
     cv.destroyAllWindows()
 
     return frame[1]
+
+def identifier(id):
+    frame = captura_frame(id)
+    gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
+    classifier = cv.CascadeClassifier('haarcascade_car.xml')
+
+    cars = classifier.detectMultiScale(gray, 1.4, 2)
+
+    if len(cars) > 1: 
+        result = True
+    else:
+        result = False
+
+    return result
+
+
+    
