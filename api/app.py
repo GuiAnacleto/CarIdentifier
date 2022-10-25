@@ -7,7 +7,7 @@ server = Flask(__name__)
 spec = FlaskPydanticSpec('flask', title='Vehicle Identifier')
 spec.register(server)
 
-class StatusRua(BaseModel):
+class StatusTransito(BaseModel):
     id_semafaro: int
     carro_esperando: bool
     data: str
@@ -16,7 +16,7 @@ class Erro(BaseModel):
     Error : str
 
 @server.get('/camera/<int:id>')
-@spec.validate(resp=Response(HTTP_200=StatusRua))
+@spec.validate(resp=Response(HTTP_200=StatusTransito))
 def get_camera(id):
     """Retorna se a camera identificou algum veículo esperando  """
     
@@ -41,7 +41,7 @@ def get_camera(id):
     return jsonify(dic)
 
 @server.get('/mock/<status>')
-@spec.validate(resp=Response(HTTP_200=StatusRua, HTTP_400=Erro))
+@spec.validate(resp=Response(HTTP_200=StatusTransito, HTTP_400=Erro))
 def get_mock(status):
     """Endpoint para teste de verificação mockados"""
     try: 

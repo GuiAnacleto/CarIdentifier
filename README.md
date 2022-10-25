@@ -56,6 +56,22 @@ python app.py
 
 Run the above command in the same directory as the "app.py" file to run the API locally.
 
+## Using the API
+
+To run the API activate the Flask server:
+
+```
+<path: CarIdentifier/api/> 
+flask run
+```
+by default the server will use the port **5000**
+
+see access endpoints and their methods
+
+```
+localhost:5000/apidoc/swagger
+```
+
 ## 🤝 Collaborators
 
 We thank the following people who contributed to this project:
