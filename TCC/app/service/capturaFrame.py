@@ -12,7 +12,7 @@ def captura_frame(id):
         cv.waitKey(1)
     else:
         print(f"else sem carro {os.getcwd()}")
-        frame = cv.imread(r'app\utils\pexels-charles-kettor-1077785.jpg')
+        frame = cv.imread(r'app/utils/pexels-charles-kettor-1077785.jpg')
         cv.waitKey(1)
         return frame
 

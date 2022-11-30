@@ -38,7 +38,7 @@ def show_info(frame1, dilatada):
 
 carros = caminhoes = 0
 cap = cv2.VideoCapture('./video.mp4')
-subtracao = cv2.bgsegm.createBackgroundSubtractorMOG()  # Pega o fundo e subtrai do que está se movendo
+subtracao = cv2.createBackgroundSubtractorMOG2()  # Pega o fundo e subtrai do que está se movendo
 
 while True:
     ret, frame1 = cap.read()  # Pega cada frame do vídeo
