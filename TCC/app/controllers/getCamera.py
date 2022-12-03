@@ -14,7 +14,7 @@ def get_camera(id):
         dic = {
             'id_semaforo': id,
             'carro_esperando': identifier(id),
-            'data': time()
+            'data': time("string")
         }
     except Exception as e:
         print("Erro: ", e)
