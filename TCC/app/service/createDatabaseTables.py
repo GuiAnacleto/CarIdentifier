@@ -15,10 +15,9 @@ def createTables():
     # Creating table
     table = """ CREATE TABLE trafficHover (
                 id INTEGER PRIMARY KEY,
-                date date,
-                open_time time,
-                close_time time,
-                qtd_car integer
+                id_semaforo int,
+                carro_esperando  int,
+                date date
             ); """
 
     cursor_obj.execute(table)

@@ -2,6 +2,7 @@ from app import app, spec
 from flask import jsonify
 from app.service.identifier import identifier
 from app.service.time import time
+from app.service.insertDataDatabase import updateSqliteTable
 from ..model.statusClassModel import StatusTransito
 from flask_pydantic_spec import Response, Response, FlaskPydanticSpec
 
@@ -23,6 +24,8 @@ def get_camera(id):
             'carro_esperando': True,
             'data': "Sunday-01-2022 03:00:00"
         }
+
+    updateSqliteTable(dic)
 
     return jsonify(dic)
 

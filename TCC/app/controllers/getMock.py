@@ -1,5 +1,6 @@
 from app import app, spec
 from flask import jsonify
+from app.service.insertDataDatabase import updateSqliteTable
 from ..model.statusClassModel import StatusTransito, Erro
 from flask_pydantic_spec import Response, Response, FlaskPydanticSpec
 
@@ -12,15 +13,18 @@ def get_mock(status):
         if status == "true":
             dic = {
                 'id_semaforo': 1000,
-                'carro_esperando': True,
+                'carro_esperando': 1,
                 'data': "Sunday-01-2022 03:00:00"
             }
         elif status == "false":
             dic = {
                 'id_semaforo': 1000,
-                'carro_esperando': False,
+                'carro_esperando': 0,
                 'data': "Sunday-01-2022 03:00:00"
             }
+
+        updateSqliteTable(dic)
+
         return jsonify(dic)
 
     except Exception as e:
