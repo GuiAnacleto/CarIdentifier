@@ -1,22 +1,25 @@
-from app import app
-from flask import render_template, redirect, url_for, session, jsonify
+from app import app, spec
+from flask import jsonify
 from app.service.identifier import identifier
 from app.service.time import time
+from ..model.statusClassModel import StatusTransito
+from flask_pydantic_spec import Response, Response, FlaskPydanticSpec
+
 
 @app.route('/camera/<int:id>')
-#@spec.validate(resp=Response(HTTP_200=StatusTransito))
+@spec.validate(resp=Response(HTTP_200=StatusTransito))
 def get_camera(id):
     """Retorna se a camera identificou algum veículo esperando """
     try:
         dic = {
-            'id_semafaro': id,
+            'id_semaforo': id,
             'carro_esperando': identifier(id),
-            'data': time()
+            'data': time("string")
         }
     except Exception as e:
         print("Erro: ", e)
         dic = {
-            'id_semafaro': id,
+            'id_semaforo': id,
             'carro_esperando': True,
             'data': "Sunday-01-2022 03:00:00"
         }

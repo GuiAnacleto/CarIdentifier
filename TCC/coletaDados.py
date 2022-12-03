@@ -1,8 +1,15 @@
+from time import sleep
+from app.service.time import time
+from datetime import timedelta
 import cv2
 import numpy as np
-from time import sleep
 from constantes import *
 
+contador = 0 
+inicio = time("time") 
+
+cap = cv2.VideoCapture('../CarInVideo/app/video.mp4')
+subtracao = cv2.createBackgroundSubtractorMOG2() 
 
 def pega_centro(x, y, largura, altura):
     """
@@ -18,29 +25,27 @@ def pega_centro(x, y, largura, altura):
     cy = y + y1
     return cx, cy
 
-
 def set_info(detec):
-    global carros
+    global veiculos
     for (x, y) in detec:
         if (pos_linha + offset) > y > (pos_linha - offset):
-            carros += 1
+            veiculos += 1
             cv2.line(frame1, (25, pos_linha), (1200, pos_linha), (0, 127, 255), 3)
             detec.remove((x, y))
-            print("Carros detectados até o momento: " + str(carros))
-
+            print("Veículos detectados até o momento: " + str(veiculos))
+    return(veiculos)
 
 def show_info(frame1, dilatada):
-    text = f'Carros: {carros}'
+    text = f'Veiculos: {veiculos}'
     cv2.putText(frame1, text, (450, 70), cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 0, 255), 5)
-    cv2.imshow("Video Original", frame1)
     cv2.imshow("Detectar", dilatada)
+    cv2.imshow("Video Original", frame1)
+    
 
+agora = time("time")
+veiculos = 0
 
-carros = caminhoes = 0
-cap = cv2.VideoCapture('./video.mp4')
-subtracao = cv2.createBackgroundSubtractorMOG2()  # Pega o fundo e subtrai do que está se movendo
-
-while True:
+while agora < (inicio + timedelta(seconds = 5)):
     ret, frame1 = cap.read()  # Pega cada frame do vídeo
     tempo = float(1 / delay)
     sleep(tempo)  # Dá um delay entre cada processamento
@@ -66,11 +71,23 @@ while True:
         detec.append(centro)
         cv2.circle(frame1, centro, 4, (0, 0, 255), -1)
 
-    set_info(detec)
+    contador = set_info(detec)
     show_info(frame1, dilatada)
+
+    agora = time("time")
 
     if cv2.waitKey(1) == 27:
         break
 
+result = {
+    "ID": 1,
+    "quantidade_total": contador,
+    "dia_semana": inicio.strftime("%A"),
+    "data": inicio.strftime("%d-%m-%Y"),
+    "hora": inicio.strftime("%H:%M")
+    }
+
+print(result)
 cv2.destroyAllWindows()
 cap.release()
+

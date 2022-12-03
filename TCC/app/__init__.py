@@ -1,15 +1,13 @@
-import os
 import socket
-import re
-import sys
 from app.config import config
-from flask import Flask, session
-from flask_pydantic_spec import FlaskPydanticSpec, Response
-from pydantic import BaseModel
+from flask import Flask
 from colored import fg
+from flask_pydantic_spec import FlaskPydanticSpec
 
 # Define o Aplicativo
 app = Flask("app")
+spec = FlaskPydanticSpec('flask', title='Vehicle Identifier')
+spec.register(app)
 
 # Configura as Variaveis de ambiente
 if socket.gethostname() in ['envio.vps']:

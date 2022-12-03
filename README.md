@@ -61,7 +61,7 @@ Run the above command in the same directory as the "app.py" file to run the API 
 To run the API activate the Flask server:
 
 ```
-<path: CarIdentifier/api/> 
+<path: TCC/> 
 flask run
 ```
 by default the server will use the port **5000**
