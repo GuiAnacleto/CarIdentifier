@@ -31,10 +31,12 @@ def createTables():
     
     table3 = = """ CREATE TABLE timeTable (
                 id INTEGER PRIMARY KEY,
-                id_semaforo int,
-                intervalo_verde  int,
-                periodo int,
-                num_atualizacao int
+                id_semaforo text,
+                diaDaSemana text,
+                horaInicial int,
+                tempoVerde  int,
+                tempoVermelho int,
+                numAtualizacao int
             );"""
             
     cursor_obj.execute(table)
