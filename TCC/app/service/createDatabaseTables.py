@@ -29,7 +29,7 @@ def createTables():
                 hora text
             ); """
     
-    table3 = = """ CREATE TABLE timetable (
+    table3 = = """ CREATE TABLE timeTable (
                 id INTEGER PRIMARY KEY,
                 id_semaforo int,
                 intervalo_verde  int,
