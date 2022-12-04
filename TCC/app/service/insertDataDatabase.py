@@ -33,23 +33,30 @@ def updateSqliteTableCarTraffic(dict):
         sqliteConnection = sqlite3.connect('../database/DBSR4001.db')
         cursor = sqliteConnection.cursor()
 
-        """currentDateAndTime = datetime.now()
-        currentHour = currentDateAndTime.hour
-
-        today = date.today()
-        todayDate = today.strftime("%d/%m/%Y")
-
-        cursor.execute(f"SELECT qtd_car from trafficHover where date = {todayDate} AND open_time = {currentHour}")
-        qtdCarAtual = cursor.fetchone()
-        qtdCarNova = qtdCarAtual + qtdCar"""
-
         cursor.execute(f"Update carTraffic set id_semaforo = {dict.get('id_semaforo')}, quantidade_total = {dict.get('quantidade_total')}, dia_semana = {dict.get('dia_semana')}, data = {dict.get('data')}, hora = {dict.get('hora')}")
         sqliteConnection.commit()
-        print("Record Updated successfully ")
+        print("Record Updated carTraffic successfully ")
         cursor.close()
 
     except sqlite3.Error as error:
-        print("Failed to update sqlite table", error)
+        print("Failed to update sqlite carTraffic table", error)
+    finally:
+        if sqliteConnection:
+            sqliteConnection.close()
+            print("The SQLite connection is closed")
+            
+def updateSqliteTableTimeTable(dict):
+    try:
+        sqliteConnection = sqlite3.connect('../database/DBSR4001.db')
+        cursor = sqliteConnection.cursor()
+
+        cursor.execute(f"Update tableTime set id_semaforo = {dict.get('id_semaforo')}, intervalo_verde = {dict.get('intervalo_verde')}, periodo = {dict.get('periodo')}, num_atualizacao = {dict.get('num_atualizacao')}")
+        sqliteConnection.commit()
+        print("Record Updated tableTime successfully ")
+        cursor.close()
+
+    except sqlite3.Error as error:
+        print("Failed to update sqlite tableTime", error)
     finally:
         if sqliteConnection:
             sqliteConnection.close()
