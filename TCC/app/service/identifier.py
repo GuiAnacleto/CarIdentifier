@@ -9,9 +9,9 @@ def identifier(id):
     cars = classifier.detectMultiScale(gray, 1.4, 2)
 
     if len(cars) > 1: 
-        result = 1 #True
+        result = True
     else:
-        result = 0 #False
+        result = False
 
     return result
 

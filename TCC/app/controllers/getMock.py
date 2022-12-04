@@ -13,13 +13,13 @@ def get_mock(status):
         if status == "true":
             dic = {
                 'id_semaforo': 1000,
-                'carro_esperando': 1,
+                'carro_esperando': True ,
                 'data': "Sunday-01-2022 03:00:00"
             }
         elif status == "false":
             dic = {
                 'id_semaforo': 1000,
-                'carro_esperando': 0,
+                'carro_esperando': False,
                 'data': "Sunday-01-2022 03:00:00"
             }
 

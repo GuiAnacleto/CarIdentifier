@@ -4,6 +4,7 @@ from datetime import timedelta
 import cv2
 import numpy as np
 from constantes import *
+from app.service.insertDataDatabase import updateSqliteTableCarTraffic
 
 contador = 0 
 inicio = time("time") 
@@ -87,7 +88,8 @@ result = {
     "hora": inicio.strftime("%H:%M")
     }
 
-print(result)
+updateSqliteTableCarTraffic(result)
+
 cv2.destroyAllWindows()
 cap.release()
 
