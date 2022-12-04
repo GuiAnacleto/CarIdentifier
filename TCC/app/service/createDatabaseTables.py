@@ -16,13 +16,23 @@ def createTables():
     table = """ CREATE TABLE trafficHover (
                 id INTEGER PRIMARY KEY,
                 id_semaforo int,
-                carro_esperando  int,
+                carro_esperando  text,
                 date date
+            ); """
+    
+    table2 = """ CREATE TABLE carTraffic (
+                id INTEGER PRIMARY KEY,
+                id_semaforo int,
+                quantidade_total  text,
+                dia_semana text,
+                data text,
+                hora text
             ); """
 
     cursor_obj.execute(table)
-    
-    print("Table is Ready")
+    cursor_obj.execute(table2)
+
+    print("Tables is Ready")
     
     # Close the connection
     connection_obj.close()
