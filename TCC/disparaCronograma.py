@@ -1,4 +1,4 @@
-import requests
+from flask import requests
 import json
 
 def enviaCronograma(dict):
