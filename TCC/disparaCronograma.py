@@ -8,9 +8,7 @@ def enviaCronograma(dict):
   data = {"diaDaSemana": {dict.get("diaDaSemana")}, 
           "duracaoMinutos": 60, 
           "horaInicial": {dict.get("horaInicial")}, 
-          "tempoAmarelo": 5,
-          "tempoVerde": {dict.get("tempoVerde")},
-          "tempoVermelho": {dict.get("tempoVermelho")}
+          "tempoVerde": {dict.get("tempoVerde")}
           }
 
   requisicao = requests.put(f"localhost:{PORT}/{ID}", data=data)
