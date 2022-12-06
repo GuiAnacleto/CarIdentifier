@@ -1,6 +1,5 @@
 from app import app, spec
 from flask import jsonify
-from app.service.insertDataDatabase import updateSqliteTable
 from ..model.statusClassModel import StatusTransito, Erro
 from flask_pydantic_spec import Response, Response, FlaskPydanticSpec
 
@@ -22,8 +21,6 @@ def get_mock(status):
                 'carro_esperando': False,
                 'data': "Sunday-01-2022 03:00:00"
             }
-
-        updateSqliteTable(dic)
 
         return jsonify(dic)
 

@@ -1,45 +1,19 @@
 import sqlite3
+import os
 from datetime import datetime, date
-
-def updateSqliteTable(dict):
-    try:
-        sqliteConnection = sqlite3.connect('../database/DBSR4001.db')
-        cursor = sqliteConnection.cursor()
-
-        """currentDateAndTime = datetime.now()
-        currentHour = currentDateAndTime.hour
-
-        today = date.today()
-        todayDate = today.strftime("%d/%m/%Y")
-
-        cursor.execute(f"SELECT qtd_car from trafficHover where date = {todayDate} AND open_time = {currentHour}")
-        qtdCarAtual = cursor.fetchone()
-        qtdCarNova = qtdCarAtual + qtdCar"""
-
-        cursor.execute(f"Update trafficHover set id_semaforo = {dict.get('id_semaforo')}, carro_esperando = {dict.get('carro_esperando')}, date = {dict.get('data')}")
-        sqliteConnection.commit()
-        print("Record Updated successfully ")
-        cursor.close()
-
-    except sqlite3.Error as error:
-        print("Failed to update sqlite table", error)
-    finally:
-        if sqliteConnection:
-            sqliteConnection.close()
-            print("The SQLite connection is closed")
 
 def updateSqliteTableCarTraffic(dict):
     try:
-        sqliteConnection = sqlite3.connect('../database/DBSR4001.db')
+        sqliteConnection = sqlite3.connect('DBSR4001.db')
         cursor = sqliteConnection.cursor()
 
-        cursor.execute(f"Update carTraffic set id_semaforo = {dict.get('id_semaforo')}, quantidade_total = {dict.get('quantidade_total')}, dia_semana = {dict.get('dia_semana')}, data = {dict.get('data')}, hora = {dict.get('hora')}")
+        cursor.execute(f"INSERT INTO carTraffic (id_semaforo, quantidade_total, dia_semana, data, hora) VALUES (?,?,?,?,?)", (dict.get('ID'), dict.get('quantidade_total'), dict.get('dia_semana'), dict.get('data'), dict.get('hora')))
         sqliteConnection.commit()
         print("Record Updated carTraffic successfully ")
         cursor.close()
 
     except sqlite3.Error as error:
-        print("Failed to update sqlite carTraffic table", error)
+        print("Failed to update sqlite carTraffic table: ", error)
     finally:
         if sqliteConnection:
             sqliteConnection.close()
