@@ -28,9 +28,20 @@ def createTables():
                 data text,
                 hora text
             ); """
-
+    
+    table3 = = """ CREATE TABLE timeTable (
+                id INTEGER PRIMARY KEY,
+                id_semaforo text,
+                diaDaSemana text,
+                horaInicial int,
+                tempoVerde  int,
+                tempoVermelho int,
+                numAtualizacao int
+            );"""
+            
     cursor_obj.execute(table)
     cursor_obj.execute(table2)
+    cursor_obj.execute(table3)
 
     print("Tables is Ready")
     
