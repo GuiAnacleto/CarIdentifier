@@ -85,7 +85,7 @@ result = {
     "quantidade_total": contador,
     "dia_semana": int(inicio.strftime("%w")),
     "data": inicio.strftime("%d-%m-%Y"),
-    "hora": inicio.strftime("%H:%M")
+    "hora": inicio.strftime("%H")
     }
 
 updateSqliteTableCarTraffic(result)
