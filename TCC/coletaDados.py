@@ -83,7 +83,7 @@ while agora < (inicio + timedelta(seconds = 5)):
 result = {
     "ID": 1,
     "quantidade_total": contador,
-    "dia_semana": inicio.strftime("%A"),
+    "dia_semana": int(inicio.strftime("%w")),
     "data": inicio.strftime("%d-%m-%Y"),
     "hora": inicio.strftime("%H:%M")
     }
