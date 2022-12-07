@@ -17,19 +17,22 @@ def createTables():
     table2 = """ CREATE TABLE carTraffic (
                 id INTEGER PRIMARY KEY,
                 id_semaforo int,
-                quantidade_total  text,
-                dia_semana text,
+                quantidade_total  int,
+                dia_semana int,
                 data text,
-                hora text
+                hora int
             ); """
     
     table3 = """ CREATE TABLE timeTable (
                 id INTEGER PRIMARY KEY,
                 id_semaforo text,
-                diaDaSemana text,
+                diaDaSemana int,
                 horaInicial int,
                 tempoVerde  int,
-                numAtualizacao int
+                numAtualizacao int,
+                mediaQuantidade int,
+                mediaAntiga int,
+                tempoVerdeAntigo int,
             );"""            
 
     cursor_obj.execute(table2)
