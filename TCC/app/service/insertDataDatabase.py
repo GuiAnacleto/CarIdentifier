@@ -24,7 +24,7 @@ def updateSqliteTableTimeTable(dict):
         sqliteConnection = sqlite3.connect('../database/DBSR4001.db')
         cursor = sqliteConnection.cursor()
 
-        cursor.execute(f"Update tableTime set id_semaforo = {dict.get('id_semaforo')}, diaDaSemana = {dict.get('diaDaSemana')}, horaInicial = {dict.get('horaInicial')}, num_atualizacao = {dict.get('num_atualizacao')}, tempoVerde = {dict.get('tempoVerde')}, tempoVermelho = {dict.get('tempoVermelho')}")
+        cursor.execute(f"Update tableTime set id_semaforo = {dict.get('id_semaforo')}, diaDaSemana = {dict.get('diaDaSemana')}, horaInicial = {dict.get('horaInicial')}, num_atualizacao = {dict.get('num_atualizacao')}, tempoVerde = {dict.get('tempoVerde')}, mediaQuantidade = {dict.get('mediaQuantidade')}, mediaAntiga = {dict.get('mediaAntiga')}, tempoVerdeAntigo = {dict.get('tempoVerdeAntigo')} }")
         sqliteConnection.commit()
         print("Record Updated tableTime successfully ")
         cursor.close()
