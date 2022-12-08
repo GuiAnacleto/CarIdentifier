@@ -10,7 +10,6 @@ def createTables():
     cursor_obj = connection_obj.cursor()
     
     # Drop the GEEK table if already exists.
-    cursor_obj.execute("DROP TABLE IF EXISTS trafficHover")
     cursor_obj.execute("DROP TABLE IF EXISTS carTraffic")
     cursor_obj.execute("DROP TABLE IF EXISTS timeTable")
     
