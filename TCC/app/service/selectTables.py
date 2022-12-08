@@ -2,12 +2,14 @@ import sqlite3
 import pandas as pd
 
 #Retona um DF com toda informação da tabela
-def selectCarTraffic():
+def selectCarTraffic(id, dds):
     try:
         sqliteConnection = sqlite3.connect('DBSR4001.db')
         cursor = sqliteConnection.cursor()
 
-        df = pd.read_sql_query("SELECT * FROM carTraffic", sqliteConnection)
+        query = f"SELECT * FROM carTraffic WHERE id_semaforo = {id} AND dia_semana = '{dds}'"
+
+        df = pd.read_sql_query(query, sqliteConnection)
         print("Select successfully executed")
         cursor.close()
         return df
@@ -16,12 +18,14 @@ def selectCarTraffic():
         print("Failed to select carTraffic table:", error)
 
 #Retona um DF com toda informação da tabela
-def selectTimeTable():
+def selectTimeTable(id, dds):
     try:
         sqliteConnection = sqlite3.connect('DBSR4001.db')
         cursor = sqliteConnection.cursor()
 
-        df = pd.read_sql_query("SELECT * FROM timeTable", sqliteConnection)
+        query = f"SELECT * FROM timeTable WHERE id_semaforo = {id} AND dia_semana = '{dds}'"        
+
+        df = pd.read_sql_query(query, sqliteConnection)
         print("Select successfully executed")
         cursor.close()
         return df
