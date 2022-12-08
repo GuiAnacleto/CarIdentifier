@@ -28,10 +28,8 @@ def createTables():
                 diaDaSemana int,
                 horaInicial int,
                 tempoVerde  int,
-                numAtualizacao int,
-                mediaQuantidade int,
                 mediaAntiga int,
-                tempoVerdeAntigo int,
+                tempoVerdeAntigo int
             );"""            
 
     cursor_obj.execute(table2)

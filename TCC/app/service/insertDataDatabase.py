@@ -24,7 +24,25 @@ def updateSqliteTableTimeTable(dict):
         sqliteConnection = sqlite3.connect('../database/DBSR4001.db')
         cursor = sqliteConnection.cursor()
 
-        cursor.execute(f"Update tableTime set id_semaforo = {dict.get('id_semaforo')}, diaDaSemana = {dict.get('diaDaSemana')}, horaInicial = {dict.get('horaInicial')}, num_atualizacao = {dict.get('num_atualizacao')}, tempoVerde = {dict.get('tempoVerde')}, mediaQuantidade = {dict.get('mediaQuantidade')}, mediaAntiga = {dict.get('mediaAntiga')}, tempoVerdeAntigo = {dict.get('tempoVerdeAntigo')} }")
+        cursor.execute(f"Update tableTime set id_semaforo = {dict.get('id_semaforo')}, diaDaSemana = {dict.get('diaDaSemana')}, horaInicial = {dict.get('horaInicial')}, num_atualizacao = {dict.get('num_atualizacao')}, tempoVerde = {dict.get('tempoVerde')}, mediaQuantidade = {dict.get('mediaQuantidade')}, mediaAntiga = {dict.get('mediaAntiga')}, tempoVerdeAntigo = {dict.get('tempoVerdeAntigo')}")
+        sqliteConnection.commit()
+        print("Record Updated tableTime successfully ")
+        cursor.close()
+
+    except sqlite3.Error as error:
+        print("Failed to update sqlite tableTime", error)
+    finally:
+        if sqliteConnection:
+            sqliteConnection.close()
+            print("The SQLite connection is closed")
+
+
+def updateSqliteTableTimeTableOtimizacao(idSemaforo, diaDaSemana, horaInicial, tempoVerde, mediaAntiga, tempoVerdeAntigo):
+    try:
+        sqliteConnection = sqlite3.connect('../database/DBSR4001.db')
+        cursor = sqliteConnection.cursor()
+
+        cursor.execute(f"UPDATE timeTable set tempoVerde = ?, mediaAntiga = ?, tempoVerdeAntigo = ? WHERE id_semaforo = ? AND diaDaSemana = ? AND horaInicial = ?", tempoVerde, mediaAntiga, tempoVerdeAntigo, idSemaforo, diaDaSemana, horaInicial)
         sqliteConnection.commit()
         print("Record Updated tableTime successfully ")
         cursor.close()

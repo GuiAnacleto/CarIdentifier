@@ -23,7 +23,7 @@ def selectTimeTable(id, dds):
         sqliteConnection = sqlite3.connect('DBSR4001.db')
         cursor = sqliteConnection.cursor()
 
-        query = f"SELECT * FROM timeTable WHERE id_semaforo = {id} AND dia_semana = '{dds}'"        
+        query = f"SELECT * FROM timeTable WHERE id_semaforo = {id} AND diaDaSemana = '{dds}'"        
 
         df = pd.read_sql_query(query, sqliteConnection)
         print("Select successfully executed")

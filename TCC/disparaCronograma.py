@@ -1,14 +1,18 @@
-from flask import requests
 import json
+from flask import requests
+from app.service.selectTables import selectTimeTable
 
-def enviaCronograma(dict):
+
+def enviaCronograma():
   PORT = "8080"
-  ID = dict.get("id_semaforo")
+
+  dfTimeTable = selectTimeTable()
+
+  ID = dfTimeTable['id_semaforo']
   #verificar se o periodo vamos passar um por vez ou em lista em uma só requisicao
-  data = {"diaDaSemana": {dict.get("diaDaSemana")}, 
-          "duracaoMinutos": 60, 
-          "horaInicial": {dict.get("horaInicial")}, 
-          "tempoVerde": {dict.get("tempoVerde")}
+  data = {"diaDaSemana": {dfTimeTable["diaDaSemana"] + 1},
+          "horaInicial": {dfTimeTable["horaInicial"]}, 
+          "tempoVerde": {dfTimeTable["tempoVerde"]}
           }
 
   requisicao = requests.put(f"localhost:{PORT}/cronograma/{ID}", data=data)
@@ -17,3 +21,7 @@ def enviaCronograma(dict):
     return requisicao.json()
   else:
     return requisicao.status_code
+
+
+if __name__ == '__main__':
+    enviaCronograma()
